@@ -6,8 +6,12 @@ public class PinMovement : MonoBehaviour
 {
     Rigidbody2D body;
     public float speed = 5;
-    public AudioClip Clip;
-    AudioSource src;
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     public Score score;
     // Start is called before the first frame update
     void Start()
@@ -15,9 +19,6 @@ public class PinMovement : MonoBehaviour
         score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         body = gameObject.GetComponent<Rigidbody2D>();
         body.name = "Pin";
-        src = GetComponent<AudioSource>();
-        src.clip = Clip;
-        
     }   
 
     // Update is called once per frame
@@ -34,8 +35,8 @@ public class PinMovement : MonoBehaviour
     {
         if (collision.gameObject.name == "Balloon")
         {
-            
-            src.Play();
+
+            audioManager.PlaySFX(audioManager.pop);
             score.IncrementScore();
             Destroy(collision.gameObject);
             Destroy(gameObject,.4f);

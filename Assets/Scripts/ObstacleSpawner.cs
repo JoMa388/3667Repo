@@ -7,6 +7,7 @@ public class ObstacleSpawner : MonoBehaviour
     public GameObject Obstacle;
     public float spawnRate;
     public float timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +30,9 @@ public class ObstacleSpawner : MonoBehaviour
     }
     void SpawnObstacle()
     {
+
         float lowestPointX = transform.position.x - 2;
         float highestPointX = transform.position.x + 1;
-
         float Xoffset = Random.Range(lowestPointX - 5, highestPointX);
         Instantiate(Obstacle, new Vector3(Xoffset, transform.position.y, 0), transform.rotation);
     }
